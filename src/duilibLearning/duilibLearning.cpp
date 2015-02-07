@@ -10,8 +10,8 @@ using namespace DuiLib;
 class CFrameWnd : public WindowImplBase
 {
 public:
-	virtual CDuiString GetSkinFolder(){ return L""; }
-	virtual CDuiString GetSkinFile() { return L"duilib.xml"; }
+	virtual CDuiString GetSkinFolder(){ return L"resource\\skin"; }
+	virtual CDuiString GetSkinFile() { return L"skin.xml"; }
 	virtual LPCTSTR GetWindowClassName(void) const { return L"CFrameWnd";}
 };
 
@@ -21,9 +21,9 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
                      _In_ int       nCmdShow)
 {
 	CPaintManagerUI::SetInstance( hInstance ) ;
-	CPaintManagerUI::SetResourcePath( CPaintManagerUI::GetInstancePath() ) ;
 	CFrameWnd    duiFrme;
 	duiFrme.Create( NULL , _T("DUIWnd") , UI_WNDSTYLE_FRAME ,  WS_EX_WINDOWEDGE ) ;
+	duiFrme.CenterWindow();
 	duiFrme.ShowModal ();
 	return 0;
 }
