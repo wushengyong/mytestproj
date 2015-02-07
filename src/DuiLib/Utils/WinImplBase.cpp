@@ -248,6 +248,14 @@ LRESULT WindowImplBase::OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 	LRESULT lRes = CWindowWnd::HandleMessage(uMsg, wParam, lParam);
 	if( ::IsZoomed(*this) != bZoomed )
 	{
+		CControlUI* pbtnMax = static_cast<CControlUI*>(m_PaintManager.FindControl(TEXT("maxbtn")));
+		CControlUI* pbtnRestore = static_cast<CControlUI*>(m_PaintManager.FindControl(TEXT("restorebtn")));
+		// switch max button and restore button
+		if (pbtnMax && pbtnRestore)
+		{
+			pbtnMax->SetVisible(TRUE == bZoomed); // 
+			pbtnRestore->SetVisible(FALSE == bZoomed) ;
+		}
 	}
 #else
 	LRESULT lRes = CWindowWnd::HandleMessage(uMsg, wParam, lParam);

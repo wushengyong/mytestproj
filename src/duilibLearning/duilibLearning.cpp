@@ -6,28 +6,13 @@
 
 using namespace DuiLib;
 
-#define     DUI_MSGTYPE_DBCLICK      _T("dbclick")
 
-// 使之能够响应双击消息
-class CDBButtonUI : public CButtonUI
+class CFrameWnd : public WindowImplBase
 {
-public :
-	virtual void DoEvent(TEventUI& event)
-	{
-		if (event.Type == UIEVENT_DBLCLICK)
-		{
-			m_pManager->SendNotify ( this ,  DUI_MSGTYPE_DBCLICK ,  event.wParam ,   event.lParam);
-			return;
-		}
-		__super::DoEvent(event) ; 
-	}
-};
-class CDuiFrameWnd : public WindowImplBase
-{
-protected :
-	virtual CDuiString GetSkinFolder() { return _T("resource/") ; }
-	virtual CDuiString GetSkinFile() { return _T("duilib.xml") ; }
-	virtual LPCTSTR GetWindowClassName() const { return _T("CDuiFrameWnd") ; }
+public:
+	virtual CDuiString GetSkinFolder(){ return L""; }
+	virtual CDuiString GetSkinFile() { return L"duilib.xml"; }
+	virtual LPCTSTR GetWindowClassName(void) const { return L"CFrameWnd";}
 };
 
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
@@ -37,7 +22,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 {
 	CPaintManagerUI::SetInstance( hInstance ) ;
 	CPaintManagerUI::SetResourcePath( CPaintManagerUI::GetInstancePath() ) ;
-	CDuiFrameWnd    duiFrme;
+	CFrameWnd    duiFrme;
 	duiFrme.Create( NULL , _T("DUIWnd") , UI_WNDSTYLE_FRAME ,  WS_EX_WINDOWEDGE ) ;
 	duiFrme.ShowModal ();
 	return 0;
